@@ -1,5 +1,8 @@
 # aws-healthomics-nextflow-example
-Tutorial materials for running the nf-core/sarek workflow on AWS HealthOmics
+* Youtube video
+* [Google Slides](https://docs.google.com/presentation/d/13Ew3Qx_GnlWHyE12p0sSXvBqXysa_5N131U1EmZB8h0/edit?usp=sharing)
+
+> Please remind that you need to build your cloud environment in advance
 
 ### Declare Variables
 ```
@@ -28,7 +31,7 @@ npm install
 cdk deploy --all
 ```
 
-### Clone Sarek & Generate the Docker Image Manifest file
+### Clone Sarek & Generate the Docker Image Manifest file Example: `sarek`
 ```
 cd ~
 git clone https://github.com/nf-core/sarek.git
@@ -43,7 +46,8 @@ python3 aws-healthomics-tutorials/utils/scripts/inspect_nf.py \
  --region $region \
  ~/sarek/
 ```
-
+1. check the 'sarek_dev_docker_images_manifest.json` file
+2. [check the `omics.config` file](./sarek-config/omics.config)
 ### Execute the Manifest Conversion via AWS Step Functions
 ```
 aws stepfunctions start-execution \
@@ -57,7 +61,7 @@ mv omics.config sarek/conf
 echo "includeConfig 'conf/omics.config'" >> sarek/nextflow.config
 ```
 
-### Workflow Staging
+### Workflow Staging Example: `sarek_ECR`
 ```
 export yourbucket="my-test-bucket-527778419916" 
 
@@ -66,7 +70,7 @@ zip -r sarek_ECR.zip sarek/ -x "*/\.*" "*/\.*/**"
 aws s3 cp sarek_ECR.zip s3://${yourbucket}/workshop/sarek_ECR.zip  
 ```
 
-### Register Workflow
+### Register Workflow Example: `sarek_ECR`
 ```
 export workflow_name="sarek_ECR"
 aws omics create-workflow \
@@ -87,7 +91,7 @@ echo $workflow_id
 2. modify the sample sheet file
 3. upload them to your `S3` bucket
 
-### Declare Variable
+### Declare Variable Example
 
 ```
 export workflow_name="sarek_ECR"
@@ -113,7 +117,7 @@ aws iam create-role --role-name ${omics_role_name} --assume-role-policy-document
 aws iam put-role-policy --role-name ${omics_role_name} --policy-name OmicsWorkflowV1 --policy-document file://omics_workflow_policy.json
 ```
 
-### Run workflow
+### Run workflow Example
 ```
 aws omics start-run \
   --name sarek_official_test\
