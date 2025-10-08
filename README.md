@@ -1,5 +1,5 @@
 # aws-healthomics-nextflow-example
-* Youtube video
+* [Youtube video](https://youtu.be/FznpU4PuLto?si=HUWW81cgj2rGNmP3)
 * [Google Slides](https://docs.google.com/presentation/d/13Ew3Qx_GnlWHyE12p0sSXvBqXysa_5N131U1EmZB8h0/edit?usp=sharing)
 
 > Please remind that you need to build your cloud environment in advance
